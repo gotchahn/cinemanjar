@@ -58,4 +58,12 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # The Movie DB API KEY
+  config.the_movie_db_api_key = "9e7739043d18d15b67607971153c94ee"
+
+  # Movie Glu
+  config.movie_glu_api_key = "B7kYVdTc382DOsDULk6NjkCpUGwil5M8KEbpNOdb"
+  config.movie_glu_username = "CINE_30"
+  config.movie_glu_password = "Q0lORV8zMDpzT1hiZGZiNjZ5dm8="
 end
