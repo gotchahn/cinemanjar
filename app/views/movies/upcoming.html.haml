@@ -1,0 +1,11 @@
+
+- @movies.each_slice(3) do |movie_set|
+  .row.justify-content-center
+    - movie_set.each do |movie|
+      .col-sm
+        .card.text-center{ style: "width: 18rem;" }
+          = image_tag(movie.poster_url, size: "280x200", class: "mx-auto")
+          .card-body
+            %h5{ class: "card-title" }= movie.title
+            %p{ class: "card-text" }
+              = movie.overview

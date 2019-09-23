@@ -32,8 +32,17 @@ class Movie < TheMovieDbApi
     end
   end
 
+  def cast
+    response = self.class.get("movie/#{id}/credits")
+
+    if response.success?
+      self.class.source_to_collection(response.body["cast"], Actor)
+    else
+      []
+    end
+  end
+
   def similar_movies
-    return [] unless id
     response = self.class.get("movie/#{id}/similar")
 
     if response.success?
@@ -43,7 +52,21 @@ class Movie < TheMovieDbApi
     end
   end
 
+  def videos
+    response = self.class.get("movie/#{id}/videos")
+
+    if response.success?
+      self.class.source_to_collection(response.body["results"], Video)
+    else
+      []
+    end
+  end
+
+  def thumbnail_url
+    "https://image.tmdb.org/t/p/w500/#{poster_path}"
+  end
+
   def poster_url
-    "https://image.tmdb.org/t/p/w300#{poster_path}"
+    "https://image.tmdb.org/t/p/w500/#{poster_path}"
   end
 end
