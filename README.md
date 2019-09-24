@@ -1,24 +1,14 @@
-# README
+# Description
+Given I am an user that like watching movies and going out to eat
+Then I would like a site that can show me the movies that are showing nerby
+And the good restaurants around my area
+Then I can pick what to watch and what to eat
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+That's Cinemanjar!
 
-Things you may want to cover:
+APIs USED:
 
-* Ruby version
+* For Movie Details [The Movie DB API](https://developers.themoviedb.org/3/getting-started/introduction)
 
-* System dependencies
+* For Cinema Details [Movie Glu API](https://developer.movieglu.com/v2/api-index/quick-start-guide/)
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
