@@ -1,0 +1,13 @@
+%h1 Log In to Cinemanjar
+%hr
+
+- if flash[:error]
+  = flash[:error]
+
+= form_for :session, url: login_path do |f|
+  .form-group
+    = f.text_field :username, class: "form-control", placeholder: "Username o Email"
+  .form-group
+    = f.password_field :password, class: "form-control", placeholder: "Password"
+  .form-group
+    = f.submit "Login", class: "btn btn-primary"

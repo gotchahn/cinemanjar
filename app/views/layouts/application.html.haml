@@ -8,5 +8,13 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+
+    %nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+      = link_to "CINAMANJAR", root_path, class: "navbar-brand"
+      #navbarNavAltMarkup.collapse.navbar-collapse
+        .navbar-nav
+          = link_to "LOGIN", login_path, class: "nav-item nav-link"
+          = link_to "SIGN UP", signup_path, class: "nav-item nav-link"
+
     .container
       = yield
