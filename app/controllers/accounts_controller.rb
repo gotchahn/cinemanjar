@@ -9,6 +9,7 @@ class AccountsController < ApplicationController
     if @account.save
       redirect_to upcoming_movies_path
     else
+      flash[:error] = "Please Fix the Errors"
       render :new
     end
   end

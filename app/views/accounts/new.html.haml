@@ -2,6 +2,14 @@
 %hr
 %p Enter your information before start to enjoy finding movies and food
 
+- if flash[:error]
+  .alert
+    .alert-danger{role: "alert"}
+      %p= flash[:error]
+      %ul
+      - @account.errors.full_messages.each do |msg|
+        %li=msg
+
 = form_for @account, url: account_path do |f|
   .form-group
     = f.label :username
@@ -11,7 +19,7 @@
     = f.text_field :name, class: "form-control"
   .form-group
     = f.label :email
-    = f.email_field :name, class: "form-control"
+    = f.email_field :email, class: "form-control"
   .form-group
     = f.label :password
     = f.password_field :password, class: "form-control"
