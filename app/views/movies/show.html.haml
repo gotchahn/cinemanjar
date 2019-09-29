@@ -1,12 +1,15 @@
 = render partial: "movies_tab", locals: {movie: @movie}
 
 .row.justify-content-center
-  %h1= @movie.title
+  %h2= link_to @movie.title, @movie.imdb_url, target: "_blank;"
 .row
   .col
     = image_tag(@movie.poster_url, class: "rounded img-fluid float-right", size: "300x450")
   .col
     %ul.list-group
+      %li.list-group-item
+        %em
+          = @movie.overview
       %li.list-group-item
         %strong Release:
         = nice_date(@movie.release_date.to_date)
@@ -14,3 +17,39 @@
         %strong Runtime:
         = @movie.runtime
         %em minutes
+%hr
+.row.justify-content-center
+  %h4 Main Cast
+.row.justify-content-center
+  %table.table
+    %thead.thead-light
+      %tr
+        %th{scope: "col"} Actor
+        %th{scope: "col"} Character
+    %tbody
+      - @cast.first(5).each do |actor|
+        %tr
+          %td= actor.name
+          %td
+            %em= actor.character
+
+- trailer = youtube_trailer(@videos)
+- if trailer
+  %hr
+  .row.justify-content-center
+    %h3 Trailer
+  .row.justify-content-center
+    %iframe{ src: "#{trailer.youtube_embeded_url}", frameborder: "0", width: "1200", height: "600"}
+
+- if @similars.any?
+  %hr
+  .row.justify-content-center
+    %h3 Smilar Movies
+  .row.justify-content-center
+    - @similars.each do |similar_movie|
+      .col-sm
+        %figure.figure
+          = link_to movie_path(similar_movie.id) do
+            = image_tag(similar_movie.poster_url, class: "figure-img img-thumbnail rounded")
+          %figcaption.figure-caption
+            = similar_movie.title

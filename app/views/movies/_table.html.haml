@@ -8,4 +8,5 @@
           .card-body
             %h5{ class: "card-title" }= movie.title
             %p{ class: "card-text" }
-              = truncate(movie.overview, length: 150)
+              = truncate(movie.overview, length: 60)
+            = link_to "Details", movie_path(movie.id), class: "btn btn-primary"

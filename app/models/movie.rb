@@ -65,4 +65,8 @@ class Movie < TheMovieDbApi
   def poster_url
     "https://image.tmdb.org/t/p/w500/#{poster_path}"
   end
+
+  def imdb_url
+    "https://www.imdb.com/title/#{imdb_id}/"
+  end
 end

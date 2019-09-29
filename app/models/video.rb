@@ -3,11 +3,15 @@ class Video
   attr_accessor :key, :site, :type
 
   def youtube?
-    type == "YouTube"
+    site == "YouTube"
   end
 
-  def youtube_url
+  def trailer?
+    type == "Trailer"
+  end
+
+  def youtube_embeded_url
     return "" unless youtube?
-    "https://www.youtube.com/watch?v=#{key}"
+    "https://www.youtube.com/embed/#{key}?rel=0&autoplay=0"
   end
 end
