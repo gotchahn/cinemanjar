@@ -1,0 +1,16 @@
+= render partial: "movies_tab", locals: {movie: @movie}
+
+.row.justify-content-center
+  %h1= @movie.title
+.row
+  .col
+    = image_tag(@movie.poster_url, class: "rounded img-fluid float-right", size: "300x450")
+  .col
+    %ul.list-group
+      %li.list-group-item
+        %strong Release:
+        = nice_date(@movie.release_date.to_date)
+      %li.list-group-item
+        %strong Runtime:
+        = @movie.runtime
+        %em minutes

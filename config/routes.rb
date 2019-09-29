@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   resource :account
   resources :movies do
     get :upcoming, on: :collection
+    get :showing, on: :collection
   end
 end

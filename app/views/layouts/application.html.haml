@@ -13,12 +13,14 @@
       = link_to "CINAMANJAR", root_path, class: "navbar-brand"
       #navbarNavAltMarkup.collapse.navbar-collapse
         .navbar-nav
-          - if current_account
+          - if current_account.present?
+            = link_to "DASHBOARD", "#", class: "nav-item nav-link"
+            = link_to "MOVIES", upcoming_movies_path, class: "nav-item nav-link"
+            = link_to "FOOD", "#", class: "nav-item nav-link"
+            = link_to "LOGOUT", logout_path, class: "nav-item nav-link", data: { method: :delete, "no-turbolink" => true }
+          - else
             = link_to "LOGIN", login_path, class: "nav-item nav-link"
             = link_to "SIGN UP", signup_path, class: "nav-item nav-link"
-          - else
-            = link_to "UPCOMING", upcoming_movies_path, class: "nav-item nav-link"
-            = link_to "LOGOUT", logout_path, class: "nav-item nav-link", data: { method: :delete }
 
     .container
       = yield

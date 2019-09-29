@@ -62,10 +62,6 @@ class Movie < TheMovieDbApi
     end
   end
 
-  def thumbnail_url
-    "https://image.tmdb.org/t/p/w500/#{poster_path}"
-  end
-
   def poster_url
     "https://image.tmdb.org/t/p/w500/#{poster_path}"
   end

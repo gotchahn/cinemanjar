@@ -1,0 +1,11 @@
+- movies.each_slice(3) do |movie_set|
+  .row.justify-content-center
+    - movie_set.each do |movie|
+      .col-sm
+        .card.text-center{ style: "width: 18rem;" }
+          =link_to movie_path(movie.id) do
+            = image_tag(movie.poster_url, class: "mx-auto img-thumbnail")
+          .card-body
+            %h5{ class: "card-title" }= movie.title
+            %p{ class: "card-text" }
+              = truncate(movie.overview, length: 150)

@@ -3,6 +3,9 @@ class AccountsController < ApplicationController
     @account = Account.new
   end
 
+  def show 
+  end
+
   def create
     @account = Account.new(new_account_params)
 
