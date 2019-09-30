@@ -66,4 +66,6 @@ Rails.application.configure do
   config.movie_glu_api_key = "B7kYVdTc382DOsDULk6NjkCpUGwil5M8KEbpNOdb"
   config.movie_glu_username = "CINE_30"
   config.movie_glu_password = "Q0lORV8zMDpzT1hiZGZiNjZ5dm8="
+
+  config.omdb_api_key = "21557e00"
 end

@@ -17,29 +17,28 @@
         %strong Runtime:
         = @movie.runtime
         %em minutes
+      %li.list-group-item
+        %strong Genres:
+        = @movie.genres.map{ |genre| genre["name"]}.join(", ")
+      - @movie.raitings.each do |rating|
+        %li.list-group-item
+          %strong= "#{rating["Source"]}:"
+          = rating["Value"]
 %hr
 .row.justify-content-center
-  %h4 Main Cast
-.row.justify-content-center
-  %table.table
-    %thead.thead-light
-      %tr
-        %th{scope: "col"} Actor
-        %th{scope: "col"} Character
-    %tbody
-      - @cast.first(5).each do |actor|
-        %tr
-          %td= actor.name
-          %td
+  .col
+    %h3 Main Cast
+    %ul.list-unstyled
+      - @cast.first(6).each do |actor|
+        %li.media
+          = image_tag(actor.image_url, class: "mr-3", size: "50x75")
+          .media-body
+            %h5{class: "mt-0 mb-1"}= link_to actor.name, actor.imdb_url, target: "_blank;"
             %em= actor.character
-
-- trailer = youtube_trailer(@videos)
-- if trailer
-  %hr
-  .row.justify-content-center
+  .col
+    - trailer = youtube_trailer(@videos)
     %h3 Trailer
-  .row.justify-content-center
-    %iframe{ src: "#{trailer.youtube_embeded_url}", frameborder: "0", width: "1200", height: "600"}
+    %iframe{ src: "#{trailer.youtube_embeded_url}", frameborder: "0", width: "800", height: "450"}
 
 - if @similars.any?
   %hr
@@ -53,3 +52,14 @@
             = image_tag(similar_movie.poster_url, class: "figure-img img-thumbnail rounded")
           %figcaption.figure-caption
             = similar_movie.title
+
+%hr
+.row.justify-content-center
+  %h4 Data Thanks to:
+.row.justify-content-center
+  .col-sm
+    = link_to "https://developers.themoviedb.org/3/getting-started/" do
+      = image_tag("tmdb.png")
+  .col-sm
+    = link_to "http://www.omdbapi.com/" do
+      = image_tag("omdb.png", size: "358x141")

@@ -1,8 +1,6 @@
 class Movie < TheMovieDbApi
   attr_accessor :id, :imdb_id, :poster_path, :overview, :title, :release_date,
-    :popularity, :original_language, :runtime, :homepage
-
-  #has_many :genres
+    :popularity, :original_language, :runtime, :homepage, :genres, :vote_average
 
   def self.find(movie_id)
     response = get("movie/#{movie_id}")
@@ -68,5 +66,16 @@ class Movie < TheMovieDbApi
 
   def imdb_url
     "https://www.imdb.com/title/#{imdb_id}/"
+  end
+
+  def raitings
+    rts = Raitings.all(imdb_id)
+    rts.push(
+      {
+        "Source" => "The Movie DB",
+        "Value" => "#{vote_average}/10"
+      }
+    )
+    rts
   end
 end
