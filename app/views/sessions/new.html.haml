@@ -2,7 +2,8 @@
 %hr
 
 - if flash[:error]
-  = flash[:error]
+  .alert.alert-danger{ role: "alert" }
+    = flash[:error]
 
 = form_for :session, url: login_path do |f|
   .form-group

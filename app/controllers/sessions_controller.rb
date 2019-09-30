@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
       login(@account)
       redirect_to upcoming_movies_path
     else
+      flash[:error] = "Username or password incorrect"
       render :new
     end
   end

@@ -1,14 +1,13 @@
 %h1 Welcome to Cinemanjar
 %hr
-%p Enter your information before start to enjoy finding movies and food
+%p Enter your information:
 
 - if flash[:error]
-  .alert
-    .alert-danger{role: "alert"}
-      %p= flash[:error]
-      %ul
-      - @account.errors.full_messages.each do |msg|
-        %li=msg
+  .alert.alert-danger{role: "alert"}
+    %p= flash[:error]
+    %ul
+    - @account.errors.full_messages.each do |msg|
+      %li=msg
 
 = form_for @account, url: account_path do |f|
   .form-group

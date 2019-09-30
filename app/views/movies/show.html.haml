@@ -2,6 +2,11 @@
 
 .row.justify-content-center
   %h2= link_to @movie.title, @movie.imdb_url, target: "_blank;"
+
+- if @movie.released?
+  .row.justify-content-center
+    = link_to "SHOW TIMES", "#", class: "btn btn-success float-right"
+%hr
 .row
   .col
     = image_tag(@movie.poster_url, class: "rounded img-fluid float-right", size: "300x450")
@@ -24,6 +29,7 @@
         %li.list-group-item
           %strong= "#{rating["Source"]}:"
           = rating["Value"]
+
 %hr
 .row.justify-content-center
   .col

@@ -78,4 +78,8 @@ class Movie < TheMovieDbApi
     )
     rts
   end
+
+  def released?
+    DateTime.now >= release_date.to_date
+  end
 end
