@@ -19,6 +19,26 @@
   .form-group
     = f.label :email
     = f.email_field :email, class: "form-control"
+
+  %hr
+  %h3 Based Address
+  = f.fields_for :address do |builder|
+    .form-group
+      = builder.label :street
+      = builder.text_field :street, class: "form-control"
+    .form-group
+      = builder.label :apt_number, "Apt Number"
+      = builder.text_field :apt_number, class: "form-control"
+    .form-group
+      = builder.label :city
+      = builder.text_field :city, class: "form-control"
+    .form-group
+      = builder.label :state
+      = builder.text_field :state, class: "form-control"
+    .form-group
+      = builder.label :postal_code
+      = builder.text_field :postal_code, class: "form-control"
+
   .form-group
     = f.label :password
     = f.password_field :password, class: "form-control"

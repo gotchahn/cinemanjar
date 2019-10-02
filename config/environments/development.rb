@@ -68,4 +68,6 @@ Rails.application.configure do
   config.movie_glu_password = "Q0lORV8zMDpzT1hiZGZiNjZ5dm8="
 
   config.omdb_api_key = "21557e00"
+
+  config.geocodio_api_key = "a3675456ab72dab292aa52d9a725692d9599b25"
 end

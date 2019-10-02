@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :current_account
-  #before_action :authenticate
+  before_action :authenticate
 
   def current_account
     if session[:account_id].present?
@@ -11,5 +11,10 @@ class ApplicationController < ActionController::Base
   def login(account)
     session[:account_id] = account.id
     cookies[:username] = account.username
+  end
+
+  def authenticate
+    return if current_account.present?
+    redirect_to root_path
   end
 end
