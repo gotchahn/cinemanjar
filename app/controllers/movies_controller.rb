@@ -18,7 +18,7 @@ class MoviesController < ApplicationController
 
   def cache_movie_collection(collection_method)
     expires_in = DateTime.now.end_of_day.hour - DateTime.now.hour
-    Rails.cache.fetch(collection_method.to_s, expires_in: expires_in) do
+    Rails.cache.fetch(collection_method.to_s, expires_in: expires_in.hour) do
       Movie.public_send(collection_method)
     end
   end

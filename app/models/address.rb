@@ -10,6 +10,14 @@ class Address < ApplicationRecord
     [address1, city, state_postal].join(", ")
   end
 
+  def latlng
+    "#{latitude};#{longitude}"
+  end
+
+  def geocoded?
+    [latitude, longitude].all?{ |v| v.present? }
+  end
+
   protected
 
     def geocode

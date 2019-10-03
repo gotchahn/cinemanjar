@@ -1,0 +1,48 @@
+.row.justify-content-center
+  %h1.display-3
+    Cinemas Nearby
+    %br
+    %small.text-muted
+      Pick Your Favorite Movie Theatre
+
+- if current_account.favorite_cinema
+  %hr
+  .row.justify-content-center
+    %h3.display-4 Favorite Cinema
+  .row.justify-content-center
+    .media
+      = image_tag(@favorite_cinema.logo_url, class: "align-self-center ml-3", size: "80x80")
+      .media-body
+        %h5.mt-0= @favorite_cinema.name
+        %p= @favorite_cinema.address
+  .row.justify-content-center
+    = link_to "#", class: "btn btn-success" do
+      = fa_icon("film")
+      SHOW TIMES
+
+%hr
+.row.justify-content-center
+  %table.table.table-striped
+    - @cinemas_without_fav.each do |cinema|
+      %tr
+        %td
+          .media
+            = image_tag(cinema.logo_url, class: "align-self-center ml-3", size: "64x64")
+            .media-body
+              %h5.mt-0= cinema.cinema_name
+              %p
+                = cinema.full_address
+                %mark
+                  %strong Distance:
+                  = cinema.nice_distance
+                  %em miles
+        %td
+          .float-left
+            = form_for :cinema, url: favorite_cinema_account_path, method: :put do |f|
+              = f.hidden_field :movie_glu_cinema_id, value: cinema.cinema_id
+              = f.hidden_field :name, value: cinema.cinema_name
+              = f.hidden_field :address, value: cinema.full_address
+              = f.hidden_field :logo_url, value: cinema.logo_url
+              = f.button :submit, class: "btn btn-primary" do
+                = fa_icon("heart")
+                Set As Favorite

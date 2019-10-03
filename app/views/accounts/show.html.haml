@@ -10,6 +10,10 @@
   .alert.alert-success{ role: "alert" }
     = flash[:notice]
 
+- if flash[:error]
+  .alert.alert-danger{ role: "alert" }
+    = flash[:error]
+
 .row.justify-content-center
   .col
     %ul.list-group.list-group-flush

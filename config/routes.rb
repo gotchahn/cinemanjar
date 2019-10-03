@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   get "/signup" => "accounts#new"
   post "/signup" => "accounts#create"
 
-  resource :account
+  resource :account do
+    put :favorite_cinema
+  end
 
   resources :movies do
     get :upcoming, on: :collection
