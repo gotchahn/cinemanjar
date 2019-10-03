@@ -1,4 +1,4 @@
-class Cinema < MovieGluApi
+class MovieGluCinema < MovieGluApi
   attr_accessor :cinema_id, :cinema_name, :address, :address2, :city,
     :postcode, :distance, :logo_url
 
@@ -12,6 +12,7 @@ class Cinema < MovieGluApi
 
   # date must be YYYY-MM-DD format
   def now_playing(date= nil)
+    =begin
     date ||= Time.now.strftime("%Y-%m-%d")
     params = {
       cinema_id: cinema_id,
@@ -21,8 +22,14 @@ class Cinema < MovieGluApi
       request.headers["device-datetime"] = Time.now.utc.iso8601
     end
     response.body
+    =end
+    self.class.source_to_collection(test_now_playing["films"], MovieShowTime)
   end
 
+  def full_address
+    address1 = [address, address2].join(" ")
+    [address1, city, postcode].join(", ")
+  end
 
   private
 

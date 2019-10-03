@@ -14,7 +14,7 @@ class AccountsController < ApplicationController
 
     if @account.save
       login(@account)
-      redirect_to upcoming_movies_path
+      redirect_to account_path
     else
       flash[:error] = "Please Fix the Errors"
       render :new

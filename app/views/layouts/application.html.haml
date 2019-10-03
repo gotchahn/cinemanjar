@@ -10,12 +10,13 @@
   %body
 
     %nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
-      = link_to "CINAMANJAR", root_path, class: "navbar-brand"
+      = link_to root_path, class: "navbar-brand" do
+        = image_tag("logo.png", size: "200x66")
       #navbarNavAltMarkup.collapse.navbar-collapse
         .navbar-nav
           - if current_account.present?
-            = link_to "DASHBOARD", "#", class: "nav-item nav-link"
-            = link_to "MOVIES", upcoming_movies_path, class: "nav-item nav-link"
+            = link_to "DASHBOARD", account_path, class: "nav-item nav-link"
+            = link_to "MOVIES", showing_movies_path, class: "nav-item nav-link"
             = link_to "FOOD", "#", class: "nav-item nav-link"
             = link_to "LOGOUT", logout_path, class: "nav-item nav-link", data: { method: :delete, "no-turbolink" => true }
           - else
@@ -24,6 +25,8 @@
 
     .container
       = yield
+
+      = render "shared/credit"
 
     %footer.footer
       .container

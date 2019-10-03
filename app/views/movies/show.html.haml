@@ -58,14 +58,3 @@
             = image_tag(similar_movie.poster_url, class: "figure-img img-thumbnail rounded")
           %figcaption.figure-caption
             = similar_movie.title
-
-%hr
-.row.justify-content-center
-  %h4 Data Thanks to:
-.row.justify-content-center
-  .col-sm
-    = link_to "https://developers.themoviedb.org/3/getting-started/" do
-      = image_tag("tmdb.png")
-  .col-sm
-    = link_to "http://www.omdbapi.com/" do
-      = image_tag("omdb.png", size: "358x141")

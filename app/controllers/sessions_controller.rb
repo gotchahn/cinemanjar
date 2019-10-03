@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :authenticate
-  
+
   def new
   end
 
@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 
     if @account && @account.authenticate(params[:session][:password])
       login(@account)
-      redirect_to upcoming_movies_path
+      redirect_to account_path
     else
       flash[:error] = "Username or password incorrect"
       render :new

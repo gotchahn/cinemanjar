@@ -1,7 +1,36 @@
 
 .row.justify-content-center
-  = image_tag("movies.png", size: "100x100")
+  %h1.display-4
+    Your Dashboard
+    %small.text-muted
+      Review your movie and food picks
+%hr
+
+- if flash[:notice]
+  .alert.alert-success{ role: "alert" }
+    = flash[:notice]
+
 .row.justify-content-center
-  %h1 LET'S WATCH A MOVIE!
+  .col
+    %ul.list-group.list-group-flush
+      %li.list-group-item
+        %strong Name:
+        = current_account.name
+      %li.list-group-item
+        %strong Address:
+        = current_account.address.full_address
+      %li.list-group-item
+        %strong Favorite genres:
+        = current_account.favorite_genres_msg
+      %li.list-group-item
+        %strong Favorite Cinema:
+        = current_account.favorite_cinema
+  .col
+    = image_tag("avatar.jpg", class: "rounded img-fluid float-right", size: "300x450")
+
+%hr
 .row.justify-content-center
-  %h1 LET'S WATCH A MOVIE!
+  .col
+    %h3 Movie Picks
+  .col
+    %h3 Food Picks

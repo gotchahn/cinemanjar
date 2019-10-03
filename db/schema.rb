@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_063929) do
+ActiveRecord::Schema.define(version: 2019_10_03_002959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,13 @@ ActiveRecord::Schema.define(version: 2019_09_30_063929) do
     t.text "name"
     t.text "email"
     t.text "password_digest"
-    t.text "cinema_id"
     t.integer "favorite_genres", default: [], array: true
     t.date "dob"
     t.text "favorite_food", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "favorite_cinema_id"
+    t.index ["favorite_cinema_id"], name: "index_accounts_on_favorite_cinema_id"
   end
 
   create_table "addresses", force: :cascade do |t|
@@ -40,6 +41,15 @@ ActiveRecord::Schema.define(version: 2019_09_30_063929) do
     t.decimal "latitude"
     t.decimal "longitude"
     t.index ["account_id"], name: "index_addresses_on_account_id"
+  end
+
+  create_table "favorite_cinemas", force: :cascade do |t|
+    t.integer "movie_glu_cinema_id"
+    t.text "name"
+    t.text "address"
+    t.text "logo_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "addresses", "accounts"
