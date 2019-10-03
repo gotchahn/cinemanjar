@@ -14,7 +14,7 @@ class Account < ApplicationRecord
     find_by_username(value) || find_by_email(value)
   end
 
-  def favorite_cinema
+  def favorite_cinema_name
     if favorite_cinema
       favorite_cinema.name
     else

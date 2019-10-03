@@ -15,13 +15,24 @@
       #navbarNavAltMarkup.collapse.navbar-collapse
         .navbar-nav
           - if current_account.present?
-            = link_to "DASHBOARD", account_path, class: "nav-item nav-link"
-            = link_to "MOVIES", showing_movies_path, class: "nav-item nav-link"
-            = link_to "FOOD", "#", class: "nav-item nav-link"
-            = link_to "LOGOUT", logout_path, class: "nav-item nav-link", data: { method: :delete, "no-turbolink" => true }
+            = link_to account_path, class: "nav-item nav-link" do
+              = fa_icon("user-circle", class: "far")
+              DASHBOARD
+            = link_to showing_movies_path, class: "nav-item nav-link" do
+              = fa_icon "film"
+              MOVIES
+            = link_to "#", class: "nav-item nav-link" do
+              = fa_icon "fire"
+              FOOD
+            = link_to logout_path, class: "nav-item nav-link", data: { method: :delete, "no-turbolink" => true } do
+              = fa_icon("sign-out", class: "far")
+              LOGOUT
           - else
-            = link_to "LOGIN", login_path, class: "nav-item nav-link"
-            = link_to "SIGN UP", signup_path, class: "nav-item nav-link"
+            = link_to login_path, class: "nav-item nav-link" do
+              = fa_icon("sign-in-alt", class: "fas")
+            = link_to signup_path, class: "nav-item nav-link" do
+              = fa_icon("user-plus", class: "fas")
+              SIGN UP
 
     .container
       = yield

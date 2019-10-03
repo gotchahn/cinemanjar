@@ -24,10 +24,21 @@
         = current_account.favorite_genres_msg
       %li.list-group-item
         %strong Favorite Cinema:
-        = current_account.favorite_cinema
+        = current_account.favorite_cinema_name
   .col
     = image_tag("avatar.jpg", class: "rounded img-fluid float-right", size: "300x450")
-
+%hr
+.row.justify-content-center
+  .btn-group{ role: "group" }
+    = link_to cinemas_path, class: "btn btn-primary" do
+      = fa_icon("film")
+      Edit Favorite Cinema
+    = link_to edit_account_path, class: "btn btn-primary" do
+      = fa_icon("edit")
+      Edit Account
+    = link_to "#", class: "btn btn-primary" do
+      = fa_icon("key")
+      Edit Password
 %hr
 .row.justify-content-center
   .col
