@@ -10,7 +10,7 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account = Account.new(new_account_params)
+    @account = Account.new(account_params)
 
     if @account.save
       login(@account)
@@ -21,20 +21,37 @@ class AccountsController < ApplicationController
     end
   end
 
+  def edit
+    @account = current_account
+  end
+
+  def update
+    @account = current_account
+
+    if @account.update(account_params)
+      redirect_to account_path
+    else
+      flash[:error] = "Please Fix the Errors"
+      render :edit
+    end
+  end
+
+  def edit_password
+    @account = current_account
+  end
+
   def favorite_cinema
-    # current_account is read only
-    account = Account.find(current_account.id)
     cinema = FavoriteCinema.find_by_movie_glu_cinema_id(params[:cinema][:movie_glu_cinema_id])
     cinema ||= FavoriteCinema.create(set_favorite_params)
 
-    account.update_column(:favorite_cinema_id, cinema.id)
+    current_account.update_column(:favorite_cinema_id, cinema.id)
 
     redirect_to cinemas_path
   end
 
   protected
 
-  def new_account_params
+  def account_params
     params.require(:account).permit(
       :username,
       :name,
@@ -42,6 +59,7 @@ class AccountsController < ApplicationController
       :password,
       :password_confirmation,
       address_attributes: [
+        :id,
         :street,
         :apt_number,
         :city,

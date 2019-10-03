@@ -21,7 +21,7 @@ class Address < ApplicationRecord
   protected
 
     def geocode
-      return unless [latitude, longitude].any?{ |v| v.nil? }
+      return unless [street_changed?, apt_number_changed?, city_changed?].any?
 
       geocodio = Geocodio::Client.new(Rails.application.config.geocodio_api_key)
       location = geocodio.geocode([full_address])

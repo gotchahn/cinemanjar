@@ -1,0 +1,18 @@
+.row.justify-content-center
+  %h1.display-4
+    Edit Account
+    %small.text-muted
+      Enter your information:
+
+= render partial: "shared/alert_error", locals: {errors: @account.errors}
+
+= form_for @account do |f|
+  = render partial: "accounts/form", locals: {f: f}
+
+  .form-row.align-items-center
+    .col-auto
+      = f.submit "Update", class: "btn btn-primary"
+    .col-auto
+      = link_to account_path, class: "btn btn-secundary" do
+        = fa_icon("window-close")
+        Cancel

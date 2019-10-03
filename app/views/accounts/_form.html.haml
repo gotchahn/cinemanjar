@@ -1,0 +1,29 @@
+.form-group
+  = f.label :username
+  = f.text_field :username, class: "form-control"
+.form-group
+  = f.label :name, "Full Name"
+  = f.text_field :name, class: "form-control"
+.form-group
+  = f.label :email
+  = f.email_field :email, class: "form-control"
+
+%hr
+%h3 Based Address
+= f.fields_for :address do |builder|
+  .form-group
+    = builder.label :street
+    = builder.text_field :street, class: "form-control"
+  .form-group
+    = builder.label :apt_number, "Apt Number"
+    = builder.text_field :apt_number, class: "form-control"
+  .form-row
+    .form-group.col-md-6
+      = builder.label :city
+      = builder.text_field :city, class: "form-control"
+    .form-group.col-md-4
+      = builder.label :state
+      = builder.text_field :state, class: "form-control"
+    .form-group.col-md-2
+      = builder.label :postal_code
+      = builder.text_field :postal_code, class: "form-control"

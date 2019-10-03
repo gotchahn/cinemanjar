@@ -1,10 +1,11 @@
 class MoviesController < ApplicationController
-  def showing
-    @movies = cache_movie_collection(:now_playing)
-  end
 
-  def upcoming
-    @movies = cache_movie_collection(:upcoming)
+  def index
+    if params[:mode] == "upcoming"
+      @movies = cache_movie_collection(:upcoming)
+    else
+      @movies = cache_movie_collection(:now_playing)
+    end
   end
 
   def show

@@ -10,12 +10,10 @@ Rails.application.routes.draw do
 
   resource :account do
     put :favorite_cinema
+    get :edit_password
   end
 
-  resources :movies do
-    get :upcoming, on: :collection
-    get :showing, on: :collection
-  end
+  resources :movies, only: [:show, :index]
 
   resources :cinemas, only: [:index, :show] do
     resources :movies, only: [:show]

@@ -10,9 +10,7 @@
   .alert.alert-success{ role: "alert" }
     = flash[:notice]
 
-- if flash[:error]
-  .alert.alert-danger{ role: "alert" }
-    = flash[:error]
+= render partial: "shared/alert_error"
 
 .row.justify-content-center
   .col
@@ -40,7 +38,7 @@
     = link_to edit_account_path, class: "btn btn-primary" do
       = fa_icon("edit")
       Edit Account
-    = link_to "#", class: "btn btn-primary" do
+    = link_to edit_password_account_path, class: "btn btn-primary" do
       = fa_icon("key")
       Edit Password
 %hr

@@ -1,0 +1,7 @@
+- errors ||= []
+- if flash[:error]
+  .alert.alert-danger{role: "alert"}
+    %p= flash[:error]
+    %ul
+    - errors.full_messages.each do |msg|
+      %li=msg

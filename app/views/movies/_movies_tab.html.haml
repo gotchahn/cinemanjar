@@ -10,6 +10,6 @@
       %li.nav-item.active
         = link_to movie.title, "#", class: "nav-link active"
     %li.nav-item
-      = link_to "NOW SHOWING", showing_movies_path, class: "nav-link #{action_name == "showing" ? "active" : ""}"
+      = link_to "NOW SHOWING", movies_path(mode: "showing"), class: "nav-link #{params[:mode] == "showing" ? "active" : ""}"
     %li.nav-item
-      = link_to "UPCOMING MOVIES", upcoming_movies_path, class: "nav-link #{action_name == "upcoming" ? "active" : ""}"
+      = link_to "UPCOMING MOVIES", movies_path(mode: "upcoming"), class: "nav-link #{params[:mode] == "upcoming" ? "active" : ""}"
