@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   def current_account
     if session[:account_id].present?
-      @current_account = Account.find(session[:account_id])
+      @current_account = Account.preload(:movie_picks).find(session[:account_id])
     end
   end
 

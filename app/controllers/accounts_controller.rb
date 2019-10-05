@@ -50,7 +50,22 @@ class AccountsController < ApplicationController
   end
 
   def movie_pick
+    mp = current_account.movie_picks.build(movie_pick_params)
 
+    # get movie
+    movie = Movie.find(mp.movie_id)
+    mp.movie_name = movie.title
+    mp.movie_poster_url = movie.poster_url
+    mp.movie_picked_at ||= Date.current
+
+    if mp.save
+      current_account.save_new_genres(movie.genres)
+      flash[:notice] = "You have picked #{mp.movie_name}, enjoy!"
+    else
+      flash[:error] = "Something went wrong while picking the show time"
+    end
+
+    redirect_to current_account
   end
 
   protected
@@ -85,10 +100,10 @@ class AccountsController < ApplicationController
   def movie_pick_params
     params.require(:movie_pick).permit(
       :movie_id,
-      :movie_name,
+      :cinema_name,
       :start_time,
       :end_time,
-      :genres
+      :movie_picked_at
     )
   end
 end
