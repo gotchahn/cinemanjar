@@ -46,12 +46,12 @@
   .col
     %h3 Last 10 Movie Picks
     %ul.list-unstyled
-      - current_account.movie_picks.first(10).each do |pick|
+      - @movie_picks.each do |pick|
         %li.media
           = image_tag(pick.movie_poster_url, class: "mr-3", size: "50x75")
           .media-body
             %h5{class: "mt-0 mb-1"}= link_to pick.movie_name, movie_path(pick.movie_id)
-            %em.text-small= "#{nice_date(pick.movie_picked_at)} #{pick.start_time}"
+            %em.text-small= "#{pick.show_time_type} - #{nice_date(pick.movie_picked_at)} #{pick.start_time}"
             %p.lead
               at
               %em= pick.cinema_name

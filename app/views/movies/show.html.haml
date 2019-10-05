@@ -73,7 +73,7 @@
                   = fa_icon("check-circle")
                   #{time["start_time"]}-#{time["end_time"]}
               - else
-                = link_to "#{time["start_time"]}-#{time["end_time"]}", movie_pick_account_path(movie_pick_put_params(@movie, time, current_account.favorite_cinema)), method: :put, class: "btn btn-outline-primary"
+                = link_to "#{time["start_time"]}-#{time["end_time"]}", movie_pick_account_path(movie_pick_put_params(@movie, time, current_account.favorite_cinema, type)), method: :put, class: "btn btn-outline-primary"
 
     - else
       %p.em There is no show times at this teatre today

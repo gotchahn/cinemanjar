@@ -7,6 +7,7 @@ class AccountsController < ApplicationController
   end
 
   def show
+    @movie_picks = current_account.movie_picks.order(created_at: :desc).first(10)
   end
 
   def create
@@ -103,7 +104,8 @@ class AccountsController < ApplicationController
       :cinema_name,
       :start_time,
       :end_time,
-      :movie_picked_at
+      :movie_picked_at,
+      :show_time_type
     )
   end
 end
