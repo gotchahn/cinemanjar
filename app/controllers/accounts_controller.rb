@@ -49,6 +49,10 @@ class AccountsController < ApplicationController
     redirect_to cinemas_path
   end
 
+  def movie_pick
+
+  end
+
   protected
 
   def account_params
@@ -75,6 +79,16 @@ class AccountsController < ApplicationController
       :name,
       :address,
       :logo_url
+    )
+  end
+
+  def movie_pick_params
+    params.require(:movie_pick).permit(
+      :movie_id,
+      :movie_name,
+      :start_time,
+      :end_time,
+      :genres
     )
   end
 end

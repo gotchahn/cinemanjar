@@ -82,4 +82,8 @@ class Movie < TheMovieDbApi
   def released?
     DateTime.now >= release_date.to_date
   end
+
+  def genres_txt
+    genres.map{ |genre| genre["name"]}.join(", ")
+  end
 end

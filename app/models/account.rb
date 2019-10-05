@@ -7,6 +7,7 @@ class Account < ApplicationRecord
 
   has_one :address
   belongs_to :favorite_cinema
+  has_many :movie_picks
 
   accepts_nested_attributes_for :address, allow_destroy: true
 

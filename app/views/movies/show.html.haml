@@ -24,7 +24,7 @@
         %em minutes
       %li.list-group-item
         %strong Genres:
-        = @movie.genres.map{ |genre| genre["name"]}.join(", ")
+        = @movie.genres_txt
       - @movie.raitings.each do |rating|
         %li.list-group-item
           %strong= "#{rating["Source"]}:"
@@ -45,6 +45,30 @@
     - trailer = youtube_trailer(@videos)
     %h3 Trailer
     %iframe{ src: "#{trailer.youtube_embeded_url}", frameborder: "0", width: "800", height: "450"}
+
+- if current_account.favorite_cinema
+  %hr
+  .row.justify-content-center
+    %h3 Show Times on your Favorite Cinema
+  .row.justify-content-center
+    %h3= nice_date(Date.current)
+  .row.justify-content-center
+    %h5.text-small.text-muted= current_account.favorite_cinema.name
+  .row.justify-content-center
+    - if @showtimes
+      - @showtimes.showings.each do |type, info|
+        .col-sm
+          .container
+            %h4= type
+            - info["times"].each do |time|
+              .card-group
+                .card.text-white.border-primary.mb-3
+                  = link_to movie_pick_account_path(movie_pick_put_params(@movie, time)), method: :put do
+                    .card-body
+                      %h5.card-title.text-center= "#{time["start_time"]}-#{time["end_time"]}"
+    - else
+      %p.em There is no show times at this teatre today
+
 
 - if @similars.any?
   %hr
