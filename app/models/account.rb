@@ -25,7 +25,8 @@ class Account < ApplicationRecord
 
   def favorite_genres_msg
     if favorite_genres.any?
-      favorite_genres.join(", ")
+      genres = Genre.get_names(favorite_genres)
+      genres.join(", ")
     else
       "You haven't picked any movie yet"
     end
@@ -33,8 +34,8 @@ class Account < ApplicationRecord
 
   def save_new_genres(genres)
     genres.each do |genre|
-      unless favorite_genres.include?(genre["name"])
-        favorite_genres.push(genre["name"])
+      unless favorite_genres.include?(genre["id"])
+        favorite_genres.push(genre["id"])
       end
     end
     save if favorite_genres_changed?
