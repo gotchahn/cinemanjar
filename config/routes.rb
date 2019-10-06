@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'foods/index'
+  get 'foods/show'
   root "home#index"
 
   get "/login" => "sessions#new"

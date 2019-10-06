@@ -29,7 +29,7 @@ class CinemasController < ApplicationController
 
     def cache_key
       # lat;lng;nearby
-      "#{current_account.address.latlng};nearby"
+      "#{current_account.address.latlng};cinemasnearby"
     end
 
     def inject_tmdb_movie_id

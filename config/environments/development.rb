@@ -70,4 +70,5 @@ Rails.application.configure do
   config.omdb_api_key = "21557e00"
 
   config.geocodio_api_key = "a3675456ab72dab292aa52d9a725692d9599b25"
+  config.zomato_api_key = "f275a90792d16a9560e7d4c4bde78252"
 end
