@@ -3,19 +3,27 @@ class MovieGluCinema < MovieGluApi
     :postcode, :distance, :logo_url
 
   def self.nearby(current_account, limit=5)
-    # response = connection.get("cinemasNearby/", { n: limit }) do |request|
-    #  request.headers["geolocation"] = "39.919404;-104.9908763"
-    #  request.headers["device-datetime"] = Time.now.utc.iso8601
-    # end
-    source_to_collection( test_cinamas_list )
+    response = connection.get("cinemasNearby/", { n: limit }) do |request|
+      request.headers["geolocation"] = "39.919404;-104.9908763"
+      request.headers["device-datetime"] = Time.now.utc.iso8601
+    end
+
+    body = response.success? ? response.body : test_cinamas_list
+    source_to_collection( body )
+  end
+
+  def self.find(movie_glu_cinema_id, geolocation)
+     response = connection.get("cinemaDetails/", { cinema_id: movie_glu_cinema_id }) do |request|
+      request.headers["geolocation"] = geolocation
+      request.headers["device-datetime"] = Time.now.utc.iso8601
+     end
+
+     body = response.success? ? response.body : test_cinema_details_body
+     new( body )
   end
 
   # date must be YYYY-MM-DD format
   def now_playing(date= nil)
-    self.class.source_to_collection(test_now_playing["films"], MovieShowTime)
-  end
-
-  def commented
     date ||= Time.now.strftime("%Y-%m-%d")
     params = {
       cinema_id: cinema_id,
@@ -24,7 +32,9 @@ class MovieGluCinema < MovieGluApi
     response = self.class.connection.get("cinemaShowTimes/", params) do |request|
       request.headers["device-datetime"] = Time.now.utc.iso8601
     end
-    response.body
+
+    body = response.success? ? response.body["films"] : test_now_playing["films"]
+    self.class.source_to_collection(body, MovieShowTime)
   end
 
   def full_address
@@ -38,9 +48,13 @@ class MovieGluCinema < MovieGluApi
 
   private
 
-    # in case I reach the 75 quota limit
+    # in case I reach the 75 quota limit ==========
     def self.test_cinamas_list
       [{"cinema_id"=>10826, "cinema_name"=>"AMC Orchard 12", "address"=>"14653 Orchard Parkway", "address2"=>"", "city"=>"Westminster", "county"=>"Adams", "postcode"=>80023, "lat"=>39.958038, "lng"=>-104.993698, "distance"=>2.6737216856517, "logo_url"=>"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Amc_theatres_logo.svg/1200px-Amc_theatres_logo.svg.png"}, {"cinema_id"=>4196, "cinema_name"=>"AMC Westminster Promenade 24", "address"=>"10655 Westminster Boulevard", "address2"=>"", "city"=>"Westminster", "county"=>"Jefferson", "postcode"=>80020, "lat"=>39.889198, "lng"=>-105.070702, "distance"=>4.7179793245408, "logo_url"=>"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Amc_theatres_logo.svg/1200px-Amc_theatres_logo.svg.png"}, {"cinema_id"=>49307, "cinema_name"=>"Alamo Drafthouse Cinema - Westminster", "address"=>"8905 Westminster Boulevard", "address2"=>"", "city"=>"Westminster", "county"=>"Jefferson", "postcode"=>80031, "lat"=>39.863892, "lng"=>-105.062698, "distance"=>5.4047863150156, "logo_url"=>"https://s3.drafthouse.com/branding/assets/Primary_Logo/Standard_1color/ADC_Logo_ST_1C_RGB.png"}, {"cinema_id"=>2980, "cinema_name"=>"88 Drive-In Theatre", "address"=>"8780 Rosemary Street", "address2"=>"", "city"=>"Commerce City", "county"=>"Adams", "postcode"=>80022, "lat"=>39.855728, "lng"=>-104.899597, "distance"=>6.5406095882819, "logo_url"=>"https://assets.movieglu.com/chain_logos/us/UK-0-sq.jpg"}, {"cinema_id"=>8058, "cinema_name"=>"AMC Flatiron Crossing 14", "address"=>"61 West Flatiron Circle", "address2"=>"", "city"=>"Broomfield", "county"=>"Broomfield", "postcode"=>80021, "lat"=>39.929722, "lng"=>-105.130898, "distance"=>7.4539322777194, "logo_url"=>"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Amc_theatres_logo.svg/1200px-Amc_theatres_logo.svg.png"}]
+    end
+
+    def self.test_cinema_details_body
+      {"cinema_id"=>10826, "cinema_name"=>"AMC Orchard 12", "address"=>"14653 Orchard Parkway", "address2"=>"", "city"=>"Westminster", "county"=>"Adams", "country"=>"USA", "postcode"=>80023, "phone"=>"(303)920-1222", "lat"=>39.958038, "lng"=>-104.993698, "distance"=>2.728902829367, "ticketing"=>0, "directions"=>"", "logo_url"=>"https://assets.movieglu.com/chain_logos/us/UK-124-sq.jpg", "show_dates"=>[{"date"=>"2019-10-06"}, {"date"=>"2019-10-07"}, {"date"=>"2019-10-08"}, {"date"=>"2019-10-09"}, {"date"=>"2019-10-10"}, {"date"=>"2019-10-11"}, {"date"=>"2019-10-12"}, {"date"=>"2019-10-13"}, {"date"=>"2019-10-14"}, {"date"=>"2019-10-15"}, {"date"=>"2019-10-16"}, {"date"=>"2019-10-17"}, {"date"=>"2019-10-18"}, {"date"=>"2019-10-19"}, {"date"=>"2019-10-20"}, {"date"=>"2019-10-21"}, {"date"=>"2019-10-22"}, {"date"=>"2019-10-23"}, {"date"=>"2019-10-24"}, {"date"=>"2019-10-25"}, {"date"=>"2019-10-26"}, {"date"=>"2019-10-27"}, {"date"=>"2019-10-28"}, {"date"=>"2019-10-29"}, {"date"=>"2019-10-30"}, {"date"=>"2019-10-31"}, {"date"=>"2019-11-04"}, {"date"=>"2019-11-06"}, {"date"=>"2019-11-07"}, {"date"=>"2019-11-09"}, {"date"=>"2019-11-10"}, {"date"=>"2019-11-11"}, {"date"=>"2019-11-12"}, {"date"=>"2019-11-13"}, {"date"=>"2019-11-14"}, {"date"=>"2019-11-15"}, {"date"=>"2019-11-16"}, {"date"=>"2019-11-17"}, {"date"=>"2019-11-18"}, {"date"=>"2019-11-19"}, {"date"=>"2019-11-20"}, {"date"=>"2019-11-21"}, {"date"=>"2019-11-22"}, {"date"=>"2019-11-23"}, {"date"=>"2019-11-24"}, {"date"=>"2019-12-01"}, {"date"=>"2019-12-03"}, {"date"=>"2019-12-07"}, {"date"=>"2019-12-08"}, {"date"=>"2019-12-09"}, {"date"=>"2019-12-11"}, {"date"=>"2019-12-15"}, {"date"=>"2019-12-16"}, {"date"=>"2019-12-18"}, {"date"=>"2020-01-11"}, {"date"=>"2020-01-26"}, {"date"=>"2020-02-01"}, {"date"=>"2020-02-08"}, {"date"=>"2020-02-18"}, {"date"=>"2020-02-23"}, {"date"=>"2020-02-24"}, {"date"=>"2020-02-25"}, {"date"=>"2020-02-29"}, {"date"=>"2020-03-14"}, {"date"=>"2020-03-29"}], "status"=>{"count"=>1, "state"=>"OK", "method"=>"cinemaDetails", "message"=>nil, "request_method"=>"GET", "version"=>"CINE_30v200", "territory"=>"US", "device_datetime_sent"=>"2019-10-06 04:25:54 UTC", "device_datetime_used"=>"2019-10-06 04:25:54"}}
     end
 
     def test_now_playing

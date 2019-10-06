@@ -64,16 +64,7 @@
             .media-body
             %p.lead= @showtimes.age_rating[0]["age_advisory"]
       .row.justify-content-center
-        - @showtimes.showings.each do |type, info|
-          .col
-            %h4= type
-            - info["times"].each do |time|
-              - if current_account.movie_picks.picked_show_time?(@movie.id, time["start_time"], time["end_time"])
-                = link_to "#", class: "btn btn-success", disabled: true do
-                  = fa_icon("check-circle")
-                  #{time["start_time"]}-#{time["end_time"]}
-              - else
-                = link_to "#{time["start_time"]}-#{time["end_time"]}", movie_pick_account_path(movie_pick_put_params(@movie, time, current_account.favorite_cinema, type)), method: :put, class: "btn btn-outline-primary"
+        = render partial: "shared/showtimes", locals: {showtimes: @showtimes, movie_id: @movie.id, cinema_name: current_account.favorite_cinema.name}
 
     - else
       %p.em There is no show times at this teatre today

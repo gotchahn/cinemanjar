@@ -16,6 +16,13 @@ class CinemasController < ApplicationController
   end
 
   def show
+    cinema_id = params[:id]
+    @cinema = Rails.cache.fetch("cinemaDetails/#{cinema_id}", expires_in: 6.month) do
+      MovieGluCinema.find(cinema_id, current_account.address.latlng)
+    end
+
+    @now_playing = @cinema.now_playing
+    inject_tmdb_movie_id
   end
 
   protected
@@ -23,5 +30,11 @@ class CinemasController < ApplicationController
     def cache_key
       # lat;lng;nearby
       "#{current_account.address.latlng};nearby"
+    end
+
+    def inject_tmdb_movie_id
+      @now_playing.each do |movie|
+        movie.tmdb_movie = Movie.find_by_imdb_id(movie.web_imdb_id)
+      end
     end
 end

@@ -10,6 +10,19 @@ class Movie < TheMovieDbApi
     end
   end
 
+  def self.find_by_imdb_id(imdb_id)
+    params = {
+      external_source: "imdb_id"
+    }
+    response = get("find/#{imdb_id}", params)
+
+    if response.success?
+      if response.body["movie_results"].any?
+        new(response.body["movie_results"].first)
+      end
+    end
+  end
+
   def self.now_playing
     response = get("movie/now_playing")
 
@@ -69,13 +82,15 @@ class Movie < TheMovieDbApi
   end
 
   def raitings
-    rts = Raitings.all(imdb_id)
-    rts.push(
-      {
-        "Source" => "The Movie DB",
-        "Value" => "#{vote_average}/10"
-      }
-    )
+    rts = Raitings.all(imdb_id) || []
+    unless vote_average == 0
+      rts.push(
+        {
+          "Source" => "The Movie DB",
+          "Value" => "#{vote_average}/10"
+        }
+      )
+    end
     rts
   end
 
