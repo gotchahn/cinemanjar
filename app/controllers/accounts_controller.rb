@@ -55,7 +55,7 @@ class AccountsController < ApplicationController
     mp = current_account.movie_picks.build(movie_pick_params)
 
     # get movie
-    movie = Rails.cache.fech("movie/#{mp.movie_id}") do
+    movie = Rails.cache.fetch("movie/#{mp.movie_id}") do
       Movie.find(mp.movie_id)
     end
     mp.movie_name = movie.title

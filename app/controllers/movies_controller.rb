@@ -9,7 +9,7 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Rails.cache.fech("movie/#{params[:id]}") do
+    @movie = Rails.cache.fetch("movie/#{params[:id]}") do
       Movie.find(params[:id])
     end
     @cast = @movie.cast
