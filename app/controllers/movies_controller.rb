@@ -9,7 +9,9 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.find(params[:id])
+    @movie = Rails.cache.fech("movie/#{params[:id]}") do
+      Movie.find(params[:id])
+    end
     @cast = @movie.cast
     @videos = @movie.videos
     @similars = @movie.similar_movies.shuffle.first(4)

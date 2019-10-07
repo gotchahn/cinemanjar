@@ -3,8 +3,13 @@ module Parseable
   include ActiveModel::Model
 
   def initialize(attributes= {})
+    @raw_data ||= attributes
     new_attributes = attributes.select{ |k,v| respond_to?(:"#{k}=")}
     super(new_attributes)
+  end
+
+  def data_fetch(field)
+    @raw_data.fetch(field.to_s, nil)
   end
 
   module ClassMethods

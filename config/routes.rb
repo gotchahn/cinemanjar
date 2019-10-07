@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resource :account do
     put :favorite_cinema
+    put :food_pick
     put :movie_pick
     get :edit_password
   end

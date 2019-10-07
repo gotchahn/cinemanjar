@@ -17,7 +17,9 @@ class FoodsController < ApplicationController
   end
 
   def show
-    @restaurant = Restaurant.find(params[:id])
+    @restaurant = Rails.cache.fetch("restaurant/#{params[:id]}") do
+      Restaurant.find(params[:id])
+    end
   end
 
   def establishments

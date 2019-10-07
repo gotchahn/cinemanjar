@@ -24,6 +24,6 @@
               = fa_icon("external-link")
               Restaurant Menu
       %td.align-self-center
-        = link_to "#", class: "btn btn-primary" do
+        = link_to food_pick_account_path(food_pick_put_params(restaurant.id)), method: :put, class: "btn btn-primary" do
           = fa_icon("calendar")
           Pick It!

@@ -44,7 +44,7 @@
 %hr
 .row.justify-content-center
   .col
-    %h3 Last 10 Movie Picks
+    %h3 Last 20 Movie Picks
     %ul.list-unstyled
       - @movie_picks.each do |pick|
         %li.media
@@ -56,4 +56,13 @@
               at
               %em= pick.cinema_name
   .col
-    %h3 Food Picks
+    %h3 Last 20 Restaurant Picks
+    %ul.list-unstyled
+      - @food_picks.each do |pick|
+        %li.media
+          = image_tag(pick.restaurant_image_url, class: "mr-3", size: "50x75")
+          .media-body
+            %h5{class: "mt-0 mb-1"}= link_to pick.restaurant_name, food_path(pick.restaurant_id)
+            %em.text-small= nice_date(pick.created_at)
+            %p.lead
+              %em= pick.cuisines
