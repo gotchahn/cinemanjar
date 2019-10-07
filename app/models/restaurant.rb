@@ -1,18 +1,19 @@
 class Restaurant < ZomatoApi
   attr_accessor :id, :name, :url, :average_cost_for_two, :price_range,
-    :thumb, :featured_image, :menu_url, :cuisines, :phone_numbers, :highlights
+    :thumb, :featured_image, :menu_url, :cuisines, :phone_numbers, :highlights,
+    :establishment
 
   has_one :location, class: ZomatoLocation
   has_one :user_rating, class: ZomatoUserRaiting
   has_many :all_reviews, class: ZomatoUserReview
 
-  def self.search_for(account, establishment_id, cuisine_id)
+  def self.search_for(account, establishment_id, cuisine_id, sort= "raiting")
     params = {
       "cuisines" => cuisine_id,
       "establishment_type" => establishment_id,
       "lat" => account.address.latitude,
       "lon" => account.address.longitude,
-      "sort" => "rating"
+      "sort" => sort
     }
 
     response = connection.get("search", params)
@@ -33,5 +34,9 @@ class Restaurant < ZomatoApi
     if response.success?
       new( response.body )
     end
+  end
+
+  def establishments
+    establishment.join(", ")
   end
 end

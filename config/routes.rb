@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'foods/index'
-  get 'foods/show'
   root "home#index"
 
   get "/login" => "sessions#new"
@@ -17,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :movies, only: [:show, :index]
-
+  resources :foods
   resources :cinemas, only: [:index, :show] do
     resources :movies, only: [:show]
   end

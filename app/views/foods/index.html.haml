@@ -1,2 +1,26 @@
-%h1 Foods#index
-%p Find me in app/views/foods/index.html.haml
+.row.justify-content-center
+  %h1.display-4
+    Restaurants Near You!
+    %small.text-muted
+      What do you want to eat today?!
+%hr
+
+.row.justify-content-center
+
+  = form_for :search, url: foods_path, html: {class: "js-food-search"}, remote: true, method: :get do |f|
+    .form-row
+      .col
+        = f.collection_select :establishment_id, establishments, :id, :name, {include_blank: 'Establishment'}, class: "form-control form-control-lg"
+      .col
+        = f.collection_select :cuisine_id, cuisines, :cuisine_id, :cuisine_name, {include_blank: 'Cusine'}, class: "form-control form-control-lg"
+      .col
+        = f.select :sort, options_for_select(sort_options.map { |obj| [obj[:text], obj[:id]] }), {}, class: "form-control form-control-lg"
+      .col
+        = f.submit "Search", class: "btn btn-primary btn-lg"
+%hr
+
+.row.justify-content-center
+  .js-loading{style: "display:none;"}
+    = image_tag("spinner.gif")
+  .js-restaurants-table
+    = render partial: "foods/table", locals: { restaurants: @restaurants }

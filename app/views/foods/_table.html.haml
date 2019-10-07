@@ -1,0 +1,27 @@
+%table.table.table-striped
+  - restaurants.each do |restaurant|
+    %tr
+      %td
+        = image_tag(restaurant.thumb, class: "align-self-center mr-3m")
+      %td
+        %h5.mt-0.mb-1.display-4= link_to restaurant.name, restaurant.id
+        %ul.list-unstyled
+          %li= restaurant.location.address
+          %li
+            %strong Cuisines:
+            %em= restaurant.cuisines
+            %strong Establishments:
+            %em= restaurant.establishments
+          %li
+            %strong Phone Numbers:
+            %em= restaurant.phone_numbers
+          %li
+            %strong Raiting:
+            %em
+              = "#{restaurant.user_rating.aggregate_rating}/5 - #{restaurant.user_rating.rating_text}"
+          %li
+            = link_to restaurant.menu_url, target: "_blank;" do
+              = fa_icon("external-link")
+              Restaurant Menu
+      %td.align-self-center
+        = link_to "Pick Me", "#", class: "btn btn-primary"
