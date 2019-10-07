@@ -4,7 +4,7 @@
       %td
         = image_tag(restaurant.thumb, class: "align-self-center mr-3m")
       %td
-        %h5.mt-0.mb-1.display-4= link_to restaurant.name, restaurant.id
+        %h5.mt-0.mb-1.display-4= link_to restaurant.name, food_path(restaurant.id)
         %ul.list-unstyled
           %li= restaurant.location.address
           %li

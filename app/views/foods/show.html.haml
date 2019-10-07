@@ -1,2 +1,53 @@
-%h1 Foods#show
-%p Find me in app/views/foods/show.html.haml
+.row.justify-content-center
+  %h2.display-3= link_to @restaurant.name, @restaurant.url, target: "_blank;"
+.row.justify-content-center
+  %p.lead= @restaurant.location.address
+.row.justify-content-center
+  %p.text-small
+    = fa_icon("mobile")
+    = @restaurant.phone_numbers
+.row.justify-content-center
+  = link_to "#", class: "btn btn-primary" do
+    = fa_icon("calendar")
+    Pick It!
+%hr
+.row
+  .col
+    = image_tag(@restaurant.featured_image, class: "rounded img-fluid float-right")
+  .col
+    %ul.list-group
+      %li.list-group-item
+        %strong Cuisines:
+        = @restaurant.cuisines
+      %li.list-group-item
+        %strong Schedule:
+        = @restaurant.timings
+      %li.list-group-item
+        %strong Average Cost for Two:
+        = "#{@restaurant.currency} #{@restaurant.average_cost_for_two}"
+      %li.list-group-item
+        %strong Highlights:
+        = @restaurant.highlights.join(", ")
+      %li.list-group-item
+        %strong Zomato Raiting:
+        = "#{@restaurant.user_rating.aggregate_rating}/5"
+        = "-"
+        %span{style: "color: ##{@restaurant.user_rating.rating_color}"}
+          = @restaurant.user_rating.rating_text
+        = "-"
+        %em
+          = "#{@restaurant.user_rating.votes} votes"
+%hr
+
+.row.justify-content-center
+  #user-pictures-carousel.carousel.slide{data: {ride: "carousel"}}
+    .carousel-inner
+      - @restaurant.user_pictures.each_with_index do |picture, index|
+        .carousel-item{class: index == 0 ? "active" : ""}
+          = image_tag(picture["url"], class: "d-block w-100", size: "300x600")
+          .carousel-caption.d-none.d-md-block
+            %p= raw(picture["caption"])
+    %a.carousel-control-prev{href: "#user-pictures-carousel", role: "button", data: {slide: "prev"}}
+      %span.carousel-control-prev-icon{"aria-hidden" => true }
+    %a.carousel-control-next{href: "#user-pictures-carousel", role: "button", data: {slide: "next"}}
+      %span.carousel-control-next-icon{"aria-hidden" => true }
