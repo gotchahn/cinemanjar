@@ -3,7 +3,7 @@
     = image_tag(@cinema.logo_url, class: "align-self-center ml-3", size: "80x80")
     .media-body
       %h2.display-4= @cinema.cinema_name
-      %p= @cinema.full_address
+      %p.lead= @cinema.full_address
 %hr
 .row.justify-content-center
   %h3 SHOW TIMES TODAY
@@ -28,6 +28,5 @@
               = image_tag(movie.age_rating[0]["age_rating_image"], class: "align-self-center mr-3")
               .media-body
               %p.lead= movie.age_rating[0]["age_advisory"]
-  .row
-    = render partial: "shared/showtimes", locals: {showtimes: movie, readonly: movie.tmdb_movie.nil?, movie_id: movie.tmdb_movie.try(:id), cinema_name: @cinema.cinema_name}
+  = render partial: "shared/showtimes", locals: {showtimes: movie, readonly: movie.tmdb_movie.nil?, movie_id: movie.tmdb_movie.try(:id), cinema_name: @cinema.cinema_name}
   %hr

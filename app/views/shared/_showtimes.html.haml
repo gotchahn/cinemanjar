@@ -2,12 +2,16 @@
 - cinema_name ||= ""
 - readonly ||= false
 - showtimes.showings.each do |type, info|
-  .col
+  .row
     %h4= type
-    - info["times"].each do |time|
-      - if readonly || current_account.movie_picks.picked_show_time?(movie_id, time["start_time"], time["end_time"])
-        = link_to "#", class: "btn btn-outline-success", disabled: true do
-          = fa_icon("check-circle") unless readonly
-          = nice_showtime(time["start_time"])
-      - else
-        = link_to nice_showtime(time["start_time"]), movie_pick_account_path(movie_pick_put_params(movie_id, time, cinema_name, type)), method: :put, class: "btn btn-outline-primary"
+    %table.table
+      - info["times"].each_slice(8) do |times|
+        %tr
+          - times.each do |time|
+            %td.float-left
+              - if readonly || current_account.movie_picks.picked_show_time?(movie_id, time["start_time"], time["end_time"])
+                = link_to "#", class: "btn btn-outline-success", disabled: true do
+                  = fa_icon("check-circle") unless readonly
+                  = nice_showtime(time["start_time"])
+              - else
+                = link_to nice_showtime(time["start_time"]), movie_pick_account_path(movie_pick_put_params(movie_id, time, cinema_name, type)), method: :put, class: "btn btn-outline-primary"

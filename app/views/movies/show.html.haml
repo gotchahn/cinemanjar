@@ -63,8 +63,7 @@
             = image_tag(@showtimes.age_rating[0]["age_rating_image"], class: "align-self-center mr-3")
             .media-body
             %p.lead= @showtimes.age_rating[0]["age_advisory"]
-      .row.justify-content-center
-        = render partial: "shared/showtimes", locals: {showtimes: @showtimes, movie_id: @movie.id, cinema_name: current_account.favorite_cinema.name}
+      = render partial: "shared/showtimes", locals: {showtimes: @showtimes, movie_id: @movie.id, cinema_name: current_account.favorite_cinema.name}
 
     - else
       %p.em There is no show times at this teatre today

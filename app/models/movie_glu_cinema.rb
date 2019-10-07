@@ -29,6 +29,7 @@ class MovieGluCinema < MovieGluApi
       cinema_id: cinema_id,
       date: date
     }
+
     response = self.class.connection.get("cinemaShowTimes/", params) do |request|
       request.headers["device-datetime"] = Time.now.utc.iso8601
     end
@@ -98,6 +99,18 @@ class MovieGluCinema < MovieGluApi
                   "film_id"=>243084,
                   "film_name"=>"Abominable",
                   "times"=>[
+                    {"start_time"=>"08:30",
+                      "end_time"=>"09:57"
+                    },
+                    {"start_time"=>"09:00",
+                      "end_time"=>"10:57"
+                    },
+                    {"start_time"=>"11:30",
+                      "end_time"=>"13:00"
+                    },
+                    {"start_time"=>"12:55",
+                      "end_time"=>"14:15"
+                    },
                     {"start_time"=>"14:00",
                       "end_time"=>"15:57"
                     },
@@ -116,6 +129,16 @@ class MovieGluCinema < MovieGluApi
                   "film_id"=>293745,
                   "film_name"=>"Abominable in RealD 3D",
                   "times"=>[{"start_time"=>"16:30", "end_time"=>"18:27"}]
+                },
+                "IMAX"=>{
+                  "film_id"=>293745,
+                  "film_name"=>"Abominable in RealD 3D",
+                  "times"=>[{"start_time"=>"14:00",
+                    "end_time"=>"15:57"
+                  },
+                  {"start_time"=>"15:00",
+                    "end_time"=>"16:57"
+                  },{"start_time"=>"16:30", "end_time"=>"18:27"}]
                 }
               },
               "show_dates"=>[
