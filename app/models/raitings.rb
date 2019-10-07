@@ -2,7 +2,7 @@ class Raitings
   def self.all(imdb_id)
     params = {
       i: imdb_id,
-      apikey: Rails.application.config.omdb_api_key
+      apikey: Rails.application.credentials.omdb[:api_key]
     }
     response = connection.get("", params)
 

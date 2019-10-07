@@ -24,7 +24,7 @@ class TheMovieDbApi
 
   def self.get(endpoint_url, params={})
     params.reverse_merge!(
-      api_key: Rails.application.config.the_movie_db_api_key,
+      api_key: Rails.application.credentials.the_movie_db[:api_key],
       language: "en-US",
       region: "US"
     )

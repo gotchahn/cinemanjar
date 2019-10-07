@@ -5,7 +5,7 @@ class ZomatoApi
 
   def self.headers
     {
-      "user-key" => Rails.application.config.zomato_api_key
+      "user-key" => Rails.application.credentials.zomato[:api_key]
     }
   end
 

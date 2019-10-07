@@ -5,9 +5,9 @@ class MovieGluApi
 
   def self.headers
     {
-      "client" => Rails.application.config.movie_glu_username,
-      "x-api-key" => Rails.application.config.movie_glu_api_key,
-      "authorization" => "Basic #{Rails.application.config.movie_glu_password}" ,
+      "client" => Rails.application.credentials.movie_glu[:username],
+      "x-api-key" => Rails.application.credentials.movie_glu[:api_key],
+      "authorization" => "Basic #{Rails.application.credentials.movie_glu[:password]}" ,
       "api-version" => "v200",
       "territory" => "US"
     }

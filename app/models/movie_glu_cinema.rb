@@ -18,7 +18,7 @@ class MovieGluCinema < MovieGluApi
       request.headers["device-datetime"] = Time.now.utc.iso8601
      end
 
-     body = response.success? ? response.body : test_cinema_details_body
+     body = response.status == 200 ? response.body : test_cinema_details_body
      new( body )
   end
 
@@ -33,7 +33,7 @@ class MovieGluCinema < MovieGluApi
       request.headers["device-datetime"] = Time.now.utc.iso8601
     end
 
-    body = response.success? ? response.body["films"] : test_now_playing["films"]
+    body = response.status == 200 ? response.body["films"] : test_now_playing["films"]
     self.class.source_to_collection(body, MovieShowTime)
   end
 

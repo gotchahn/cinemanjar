@@ -14,7 +14,7 @@
       .col
         = f.collection_select :cuisine_id, cuisines, :cuisine_id, :cuisine_name, {include_blank: 'Cusine'}, class: "form-control form-control-lg"
       .col
-        = f.select :sort, options_for_select(sort_options.map { |obj| [obj[:text], obj[:id]] }), {}, class: "form-control form-control-lg"
+        = f.select :sort, options_for_select(sort_options.map { |obj| [obj[:text], obj[:value]] }), {}, class: "form-control form-control-lg"
       .col
         = f.submit "Search", class: "btn btn-primary btn-lg"
 %hr
