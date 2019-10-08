@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: cinemanjar_production
-  username: cinemanjar
-  password: <%= ENV['CINEMANJAR_DATABASE_PASSWORD'] %>
+  url: <%= ENV["DATABASE_URL"] %>
