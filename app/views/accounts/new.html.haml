@@ -6,7 +6,7 @@
 
 = render partial: "shared/alert_error", locals: {errors: @account.errors}
 
-= form_for @account do |f|
+= form_for @account, url: account_path do |f|
   = render partial: "accounts/form", locals: {f: f}
 
   .form-group

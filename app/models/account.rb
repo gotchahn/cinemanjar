@@ -6,7 +6,7 @@ class Account < ApplicationRecord
   validates_presence_of :username, :email
 
   has_one :address
-  belongs_to :favorite_cinema
+  belongs_to :favorite_cinema, optional: true
   has_many :movie_picks
   has_many :food_picks
 
