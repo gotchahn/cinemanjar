@@ -5,8 +5,7 @@ FactoryBot.define do
 
   factory :account do
     email
-    username "cgotcha"
-    password "cinemanjar"
-    address
+    username { "cgotcha" }
+    password { "cinemanjar" }
   end
 end

@@ -1,6 +1,7 @@
 class Movie < TheMovieDbApi
   attr_accessor :id, :imdb_id, :poster_path, :overview, :title, :release_date,
-    :popularity, :original_language, :runtime, :homepage, :genres, :vote_average
+    :popularity, :original_language, :runtime, :homepage, :genres, :vote_average,
+    :genre_ids
 
   def self.find(movie_id)
     response = get("movie/#{movie_id}")

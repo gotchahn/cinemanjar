@@ -6,6 +6,9 @@ class MoviesController < ApplicationController
     else
       @movies = cache_movie_collection(:now_playing)
     end
+
+    @movies_recommended = @movies.select{ |movie| (movie.genre_ids & current_account.favorite_genres).any? }
+    @other_movies = @movies.select{ |movie| !@movies_recommended.map(&:id).include?(movie.id) }
   end
 
   def show

@@ -2,7 +2,7 @@
   .row.justify-content-center
     - movie_set.each do |movie|
       .col-sm
-        .card.text-center{ style: "width: 18rem;" }
+        .card.text-center{ style: "width: 18rem;", class: "js-movie-#{movie.id}" }
           =link_to movie_path(movie.id) do
             = image_tag(movie.poster_url, class: "img-thumbnail")
           .card-body

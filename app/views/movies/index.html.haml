@@ -1,3 +1,18 @@
 
 = render "movies_tab"
-= render partial: "movies/table", locals: { movies: @movies }
+
+%hr
+.row
+  %h3
+    %em
+      Recommended Movies
+      %span.text-small.text-muted Based on your favorite genres
+
+= render partial: "movies/table", locals: { movies: @movies_recommended }
+
+%hr
+.row
+  %h3
+    %em Other Movies
+
+= render partial: "movies/table", locals: { movies: @other_movies }

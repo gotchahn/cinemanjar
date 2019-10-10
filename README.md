@@ -10,5 +10,8 @@ APIs USED:
 
 * For Movie Details [The Movie DB API](https://developers.themoviedb.org/3/getting-started/introduction)
 
+* For Movie Raitings [OMDB Api](http://www.omdbapi.com/)
+
 * For Cinema Details [Movie Glu API](https://developer.movieglu.com/v2/api-index/quick-start-guide/)
 
+* For Restaurant Details [Zomato API](https://developers.zomato.com/documentation)

@@ -4,5 +4,6 @@ FactoryBot.define do
     city  { "Gotham" }
     latitude { 34.156113 }
     longitude { -118.131943 }
+    account
   end
 end

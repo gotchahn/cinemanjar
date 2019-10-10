@@ -1,7 +1,7 @@
 = render partial: "movies_tab", locals: {movie: @movie}
 
 .row.justify-content-center
-  %h2= link_to @movie.title, @movie.imdb_url, target: "_blank;"
+  %h2.display-4= link_to @movie.title, @movie.imdb_url, target: "_blank;"
 
 %hr
 .row
