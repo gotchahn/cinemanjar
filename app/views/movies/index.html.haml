@@ -8,7 +8,12 @@
       Recommended Movies
       %span.text-small.text-muted Based on your favorite genres
 
-= render partial: "movies/table", locals: { movies: @movies_recommended }
+-if @movies_recommended.any?
+  = render partial: "movies/table", locals: { movies: @movies_recommended }
+- else
+  .row.justify-content-center
+    %em
+      %p.text-muted Start picking movies to build your favorite genres
 
 %hr
 .row
